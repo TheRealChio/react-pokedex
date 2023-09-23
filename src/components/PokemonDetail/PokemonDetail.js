@@ -6,6 +6,8 @@ import {
   StyledPokemonName,
   StyledTypesList,
   StyledTypesListItem,
+  StyledLoading,
+  StyledRotatingPokeballImg,
 } from "../StyledComponents/StyledComponents";
 import {
   Heading,
@@ -17,13 +19,14 @@ import StyledSizes from "./StyledComponents/StyledSizes";
 import StyledAbilities from "./StyledComponents/StyledAbilities";
 import StyledStats from "./StyledComponents/StyledStats";
 
+import pokeball from "../../assets/pokeball-icon.png";
+
 export default function PokemonDetail({ selectPokemon }) {
-  const { data, error, isLoading } = useSWR(selectPokemon.url);
+  const { data, isLoading } = useSWR(selectPokemon.url);
 
-  if (error) <div>Failed to load..</div>;
-  if (isLoading) <div>Loading...</div>;
-
-  const { data: finalInfo } = useSWR(data?.species.url);
+  const { data: finalInfo, isLoading: stillLoading } = useSWR(
+    data?.species.url
+  );
 
   if (!data || !finalInfo) return;
   const { abilities, height, weight, stats } = data;

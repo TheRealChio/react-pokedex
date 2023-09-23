@@ -8,6 +8,7 @@ import pokeball from "./assets/pokeball-icon.png";
 import {
   StyledPokeballImg,
   StyledLoading,
+  StyledRotatingPokeballImg,
 } from "./components/StyledComponents/StyledComponents";
 
 const fetcher = (url) => fetch(url).then((res) => res.json());
@@ -18,30 +19,23 @@ function App() {
 
   const [searchInput, setSearchInput] = useState("");
   const [selectPokemon, setSelectPokemon] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
 
-  const { data } = useSWR(pokemonUrl, {
+  const { data, isLoading } = useSWR(pokemonUrl, {
     revalidateOnFocus: false,
   });
 
-  const { data: finalData } = useSWR(data?.results, multiFetcher, {
-    revalidateOnFocus: false,
-  });
+  const { data: finalData, isLoading: stillLoading } = useSWR(
+    data?.results,
+    multiFetcher,
+    {
+      revalidateOnFocus: false,
+    }
+  );
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-  }, []);
-
-  if (isLoading)
+  if (isLoading || stillLoading)
     return (
       <StyledLoading>
-        <StyledPokeballImg
-          isLoading={isLoading}
-          src={pokeball}
-          alt="Pokeball"
-        />
+        <StyledRotatingPokeballImg src={pokeball} alt="Pokeball" />
       </StyledLoading>
     );
   if (!finalData) return;

@@ -5,29 +5,6 @@ export const StyledPokeballImg = styled.img`
   position: absolute;
   top: -15%;
   left: -10%;
-
-  ${({ isLoading }) =>
-    isLoading &&
-    css`
-    height: 30%;
-    width: auto%;
-    position: relative;
-    top: 0;
-    left: 0;
-      /* left: 50%;
-      top: 50%; */
-      animation: rotate 1.5s linear infinite;
-
-      @keyframes rotate {
-        0% {
-          transform: rotate(0deg);
-        }
-        100% {
-          transform: rotate(360deg);
-        }
-        }
-      }
-    `}
 `;
 
 export const StyledList = styled.ul`
@@ -35,7 +12,6 @@ export const StyledList = styled.ul`
   justify-content: center;
   flex-wrap: wrap;
   width: 100%;
-  /* margin-top: 1rem; */
   padding-inline: 1.5rem;
   list-style: none;
 `;
@@ -149,4 +125,20 @@ export const StyledLoading = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const StyledRotatingPokeballImg = styled.img`
+  height: 30%;
+  width: auto;
+  position: relative;
+  animation: rotate 1.5s linear infinite;
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 `;
