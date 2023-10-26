@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useSWR from "swr";
 import Pokedex from "./components/Pokedex/Pokedex";
 import SearchBar from "./components/SearchBar/Searchbar";
